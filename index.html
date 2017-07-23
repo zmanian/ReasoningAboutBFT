@@ -1,0 +1,174 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Reasoning About BFT</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1> Reasoning about Byzantine Fault Tolerance </h1>
+				</section>
+				<section>
+					<section>
+					BFT consensus is essential for Tor, Bitcoin, & other cryptocurrencies 
+					</section>
+					<section>
+						BFT consensus lets have consistent sytems when
+						<ul>
+							<li>Some of the computers are controlled by the adversary</li>
+							<li>The network is acting against us</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						History
+					</section>
+					<section data-background="ByzantineGeneralsProblem.png">
+					</section>
+					<section data-background="BFTTimeline.png">
+					</section>
+					<section data-background="BFTTimelineNakamoto.png">
+					</section>
+					<section>
+						Bitcoin is special. Demonstrated the possibility of consensus at Internet scale.
+					</section>					
+					<section data-background="BFTTimeline.png" data-state="dimbg" >
+						<h3>New protocols are appearing at an increasing rate</h3>
+						<h3>How do you tell if these things are secure? What does secure even mean?</h3>
+					</section>
+				</section>
+				<section>
+					<section>
+						Reading BFT paper is really hard.
+						Every paper describes a complicated state machine.
+					</section>	
+					<section data-background="Machine.gif">
+					</section>
+					<section>
+						Let's talk about BFT in different terms.
+					</section>
+					<section>
+						Pretend you are peer. You are looking for evidence that a message from the network is safe to accept.
+					</section>
+					<section>
+						Peers must evaluate the messages they recieve for evidence of the following.
+						<br>
+						<ul>
+							<li> Was this message originated honestly?</li>
+							<li> Do other peers see the same message as I am?</li>
+							<li> Is the equal or better competition to this message? <li>
+						</ul>
+					</section>
+					<section>
+						It is a powerful techique to re-interpret the state machine of consensus algorithim as system for producing evidence of correct operation of the system
+					</section>
+					<section>
+						
+					</section>
+				</section>
+				<section>
+					Let's Explore How Several Consensus Protocols produce this evidence.
+					<br>
+					<ul>
+						<li>Bitcoin's Proof of Work</li>
+						<li>Tendermint</li>
+						<li>Honeybadger</li>
+					</ul>
+				</section>
+				<section>
+					Every Protocol has safety limits when exceeded the evidence becomes meaningless.
+				</section>
+				<section>
+					<section>
+						Proof of Work/ Nakamoto Consensus (2008)
+						<br>
+						 by 
+						Satoshi Nakamoto
+					</section>
+					<section>
+						Rule:
+						<br>
+						Discover the most work chain.
+					</section>
+					<section>
+						Anonynmous consensus
+					</section>
+					<section>
+
+					</section>
+					<section>
+						Safety: 51% of hashing power is honest.
+					</section>
+				</section>
+				<section>
+					<section>
+					Tendermint (2014)
+					<br>
+					by
+					Jae Kwon
+					<section>
+					<section>
+					Simplicity
+					</section>
+					<section>
+					There will be only 1 chain.
+					</section>
+					<section>
+						Proof of Block correct
+					</section>
+				</section>
+
+				<section>
+					<section>
+					Honeybadger (2016)
+					<br>
+					By Andrew Miller et al.
+					<section>
+					<section>
+					Asynchrony
+					</section>
+					<section>
+					Leaderless consensus through the Asynchonous Common Set
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
